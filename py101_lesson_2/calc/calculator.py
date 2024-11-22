@@ -1,4 +1,5 @@
 """This is a simple calculator that performs basic arithmetic operations."""
+import json
 
 
 def prompt(message):
@@ -14,38 +15,43 @@ def invalid_number(number_str):
 
     return False
 
-prompt('Welcome to Calculator!')
+with open('calc.config.json', 'r') as file:
+    data = json.load(file)
 
-prompt("What's the first number?")
-number1 = input()
+prompt(data['messages']['welcome'])
 
-while invalid_number(number1):
-    prompt("Hmm... that doesn't look like a valid number.")
+while True:
+    prompt(data['messages']['check_1'])
     number1 = input()
 
-prompt("What's the second number?")
-number2 = input()
+    while invalid_number(number1):
+        prompt(data['messages']['invalid_number'])
+        number1 = input()
 
-while invalid_number(number2):
-    prompt("Hmm... that doesn't look like a valid number.")
+    prompt(data['messages']['check_2'])
     number2 = input()
 
-prompt('What operation would you like to perform? \
-    1) Add 2) Subtract 3) Multiply 4) Divide')
-operation = input()
+    while invalid_number(number2):
+        prompt(data['messages']['invalid_number'])
+        number2 = input()
 
-while operation not in ['1', '2', '3', '4']:
-    prompt('You must choose 1, 2, 3, or 4.')
+    prompt(data['messages']['operation'])
     operation = input()
 
-match operation:
-    case '1':
-        output = int(number1) + int(number2)
-    case '2':
-        output = int(number1) - int(number2)
-    case '3':
-        output = int(number1) * int(number2)
-    case '4':
-        output = int(number1) / int(number2)
+    while operation not in ['1', '2', '3', '4']:
+        prompt(data['messages']['operation_check'])
+        operation = input()
 
-print(f"The result is: {output}")
+    match operation:
+        case '1':
+            output = int(number1) + int(number2)
+        case '2':
+            output = int(number1) - int(number2)
+        case '3':
+            output = int(number1) * int(number2)
+        case '4':
+            output = int(number1) / int(number2)
+
+    print(f"The result is: {output}")
+    if not input(data['messages']['run_again']).lower().startswith('y'):
+        break

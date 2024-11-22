@@ -1,0 +1,11 @@
+{
+    "messages": {
+        "welcome": "Welcome to the Calculator!",
+        "check_1": "What's the first number?",
+        "check_2": "What's the second number?",
+        "invalid_number": "Hmm... that doesn't look like a valid number.",
+        "operation": "What operation would you like to perform? \n (add, subtract, multiply, divide)",
+        "operation_check": "You must choose 1, 2, 3, or 4.",
+        "run_again": "Would you like to perform another operation? (yes, no)"
+    }
+}
