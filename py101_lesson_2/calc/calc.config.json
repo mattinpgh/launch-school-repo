@@ -1,5 +1,5 @@
 {
-    "messages": {
+    "english_messages": {
         "welcome": "Welcome to the Calculator!",
         "check_1": "What's the first number?",
         "check_2": "What's the second number?",
@@ -7,5 +7,23 @@
         "operation": "What operation would you like to perform? \n (add, subtract, multiply, divide)",
         "operation_check": "You must choose 1, 2, 3, or 4.",
         "run_again": "Would you like to perform another operation? (yes, no)"
+    },
+    "spanish_messages": {
+        "welcome": "¡Bienvenido a la Calculadora!",
+        "check_1": "¿Cuál es el primer número?",
+        "check_2": "¿Cuál es el segundo número?",
+        "invalid_number": "Hmm... eso no parece un número válido.",
+        "operation": "¿Qué operación te gustaría realizar? \n (sumar, restar, multiplicar, dividir)",
+        "operation_check": "Debes elegir 1, 2, 3 o 4.",
+        "run_again": "¿Te gustaría realizar otra operación? (sí, no)"
+    },
+    "french_messages": {
+        "welcome": "Bienvenue sur la Calculatrice!",
+        "check_1": "Quel est le premier nombre?",
+        "check_2": "Quel est le deuxième nombre?",
+        "invalid_number": "Hmm... cela ne ressemble pas à un nombre valide.",
+        "operation": "Quelle opération souhaitez-vous effectuer? \n (ajouter, soustraire, multiplier, diviser)",
+        "operation_check": "Vous devez choisir 1, 2, 3 ou 4.",
+        "run_again": "Voulez-vous effectuer une autre opération? (oui, non)"
     }
 }

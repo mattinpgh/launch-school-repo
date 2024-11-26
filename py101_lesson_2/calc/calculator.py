@@ -9,7 +9,7 @@ def prompt(message):
 def invalid_number(number_str):
     """Check if a string is a valid number."""
     try:
-        int(number_str)
+        float(number_str)
     except ValueError:
         return True
 
@@ -18,40 +18,52 @@ def invalid_number(number_str):
 with open('calc.config.json', 'r') as file:
     data = json.load(file)
 
-prompt(data['messages']['welcome'])
+prompt('Select your language: 1. English, 2. Spanish, 3. French: ')
+language = input()
+if language == '1':
+    lang_messages = "english_messages"
+elif language == '2':
+    lang_messages = "spanish_messages"
+elif language == '3':
+    lang_messages = "french_messages"
+else:
+    prompt('Invalid language selection. Please try again.')
+    exit(1)
+
+prompt(data[lang_messages]['welcome'])
 
 while True:
-    prompt(data['messages']['check_1'])
+    prompt(data[lang_messages]['check_1'])
     number1 = input()
 
     while invalid_number(number1):
-        prompt(data['messages']['invalid_number'])
+        prompt(data[lang_messages]['invalid_number'])
         number1 = input()
 
-    prompt(data['messages']['check_2'])
+    prompt(data[lang_messages]['check_2'])
     number2 = input()
 
     while invalid_number(number2):
-        prompt(data['messages']['invalid_number'])
+        prompt(data[lang_messages]['invalid_number'])
         number2 = input()
 
-    prompt(data['messages']['operation'])
+    prompt(data[lang_messages]['operation'])
     operation = input()
 
     while operation not in ['1', '2', '3', '4']:
-        prompt(data['messages']['operation_check'])
+        prompt(data[lang_messages]['operation_check'])
         operation = input()
 
     match operation:
         case '1':
-            output = int(number1) + int(number2)
+            output = float(number1) + float(number2)
         case '2':
-            output = int(number1) - int(number2)
+            output = float(number1) - float(number2)
         case '3':
-            output = int(number1) * int(number2)
+            output = float(number1) * float(number2)
         case '4':
-            output = int(number1) / int(number2)
+            output = float(number1) / float(number2)
 
     print(f"The result is: {output}")
-    if not input(data['messages']['run_again']).lower().startswith('y'):
+    if not input(data[lang_messages]['run_again']).lower().startswith('y'):
         break
