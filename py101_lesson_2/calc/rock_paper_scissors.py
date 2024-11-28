@@ -4,11 +4,16 @@ import os
 import platform
 
 GAME_DATA = {
-    'rock': {'alias': ['1', 'r', 'rock'], 'beats': ['scissors', 'lizard']},
-    'paper': {'alias': ['2', 'p', 'paper'], 'beats': ['rock', 'spock']},
-    'scissors': {'alias': ['3', 's', 'scissors'], 'beats': ['paper', 'lizard']},
-    'lizard': {'alias': ['4', 'l', 'lizard'], 'beats': ['spock', 'paper']},
-    'spock': {'alias': ['5', 'sp', 'spock'], 'beats': ['scissors', 'rock']}
+    'rock': {'alias': ['1', 'r', 'rock'],
+             'beats': ['scissors', 'lizard']},
+    'paper': {'alias': ['2', 'p', 'paper'],
+              'beats': ['rock', 'spock']},
+    'scissors': {'alias': ['3', 's', 'scissors'],
+                 'beats': ['paper', 'lizard']},
+    'lizard': {'alias': ['4', 'l', 'lizard'],
+               'beats': ['spock', 'paper']},
+    'spock': {'alias': ['5', 'sp', 'spock'],
+              'beats': ['scissors', 'rock']}
 }
 
 ALIAS_TEXT = "\n".join(f"{key.capitalize()}={value['alias']}"
