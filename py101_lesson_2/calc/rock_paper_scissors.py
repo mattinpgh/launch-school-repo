@@ -3,23 +3,16 @@ import random
 import os
 import platform
 
+GAME_DATA = {
+    'rock': {'alias': ['1', 'r', 'rock'], 'beats': ['scissors', 'lizard']},
+    'paper': {'alias': ['2', 'p', 'paper'], 'beats': ['rock', 'spock']},
+    'scissors': {'alias': ['3', 's', 'scissors'], 'beats': ['paper', 'lizard']},
+    'lizard': {'alias': ['4', 'l', 'lizard'], 'beats': ['spock', 'paper']},
+    'spock': {'alias': ['5', 'sp', 'spock'], 'beats': ['scissors', 'rock']}
+}
 
-VALID_CHOICES = {'rock': ['1', 'r', 'rock'],
-                 'paper': ['2', 'p', 'paper'],
-                 'scissors': ['3', 'sc', 'scissors'],
-                 'lizard': ['4', 'l', 'lizard'],
-                 'spock': ['5', 'sp', 'spock'],
-                 }
-
-ALIAS_TEXT = "\n".join(f"{key.capitalize()}={value}"
-                       for key, value in VALID_CHOICES.items())
-
-WIN_CONDITIONS = {'rock': ['scissors', 'lizard'],
-                  'paper': ['rock', 'spock'],
-                  'scissors': ['paper', 'lizard'],
-                  'lizard': ['spock', 'paper'],
-                  'spock': ['rock', 'scissors']}
-
+ALIAS_TEXT = "\n".join(f"{key.capitalize()}={value['alias']}"
+                       for key, value in GAME_DATA.items())
 
 def prompt(message):
     """
@@ -30,11 +23,11 @@ def prompt(message):
 
 def normalize_choice(user_choice):
     """
-    Returns: user input from any alias back to a key
+    Returns user input from any alias back to a key
     to simplify finding a winner
     """
-    for key, aliases in VALID_CHOICES.items():
-        if user_choice in aliases:
+    for key, value in GAME_DATA.items():
+        if user_choice in value['alias']:
             return key
     return None
 
@@ -48,9 +41,9 @@ def check_winner(human_choice_compare, machine_choice_compare):
     """
     if human_choice_compare == machine_choice_compare:
         return "tie"
-    if human_choice_compare in WIN_CONDITIONS[machine_choice_compare]:
+    if human_choice_compare in GAME_DATA[machine_choice_compare]['beats']:
         return "machine"
-    if machine_choice_compare in WIN_CONDITIONS[human_choice_compare]:
+    if machine_choice_compare in GAME_DATA[human_choice_compare]['beats']:
         return "human"
     return None
 
@@ -103,10 +96,11 @@ def main():
     """
     human_wins = 0
     machine_wins = 0
+    play_again = "continue"
 
     while True:
         human_choice = make_choice()
-        computer_choice = random.choice(list(VALID_CHOICES.keys()))
+        computer_choice = random.choice(list(GAME_DATA.keys()))
         round_winner = check_winner(human_choice, computer_choice)
         prompt(f'You chose {human_choice}. The computer chose {computer_choice}.')
 
@@ -125,6 +119,7 @@ def main():
         if game_over:
             print('The game is over! Resetting the score.')
             human_wins, machine_wins = 0, 0
+            play_again = "start a new game"
 
             if winner == "human":
                 print("Congratulations! You are the grand winner!")
@@ -132,7 +127,7 @@ def main():
                 print("Sorry, but the computer is the grand winner!")
 
         while True:
-            prompt("Would you like to play again? (yes, no)")
+            prompt(f"Would you like to {play_again}? (yes, no)")
             answer = input().lower()
             if answer.startswith('n') or answer.startswith('y'):
                 prompt("Thank you for playing!")
